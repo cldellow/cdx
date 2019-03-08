@@ -4,7 +4,6 @@ import java.io._
 import java.util.zip._
 import org.apache.commons.io.IOUtils
 import org.jsoup._
-import org.jsoup.nodes._
 import scala.collection.JavaConverters._
 
 object OneHop {
@@ -21,6 +20,15 @@ object OneHop {
     val cdxPath = Option(System.getenv("CDX_ROOT")).getOrElse("./cache")
     val cdx = Cdx(cdxPath)
     val api = cdx.collections.filter(_.id == index).headOption
+
+    def normalizeUrl(url: String): String =
+      url
+        .stripPrefix("http://")
+        .stripPrefix("https://")
+        .stripPrefix("www.")
+        .replaceAll("#.*", "")
+        .replaceAll("/$", "")
+
 
     api match {
       case None =>
@@ -42,7 +50,7 @@ object OneHop {
 
               isAbs && host == url.stripPrefix("http://").stripPrefix("https://").stripPrefix("www.").takeWhile(_ != '/')
             }
-              .map(_.replaceAll("#.*", ""))
+              .map(normalizeUrl)
               .take(10)
               .distinct)
 
@@ -55,7 +63,7 @@ object OneHop {
               true
             }
             cdx.query(api.cdxApi, host + "/*")
-              .filter { entry => urls.contains(entry.url) && shouldTake(entry.url) }
+              .filter { entry => urls.contains(normalizeUrl(entry.url)) && shouldTake(normalizeUrl(entry.url)) }
               .foreach { entry =>
                 val zis = new GZIPInputStream(new ByteArrayInputStream(cdx.fetchWarc(entry.s3Url, entry.range)))
                 IOUtils.copy(zis, System.out)
