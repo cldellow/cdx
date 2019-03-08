@@ -10,7 +10,7 @@ class CdxTest extends FlatSpec with Matchers {
     cdx.query(
       "https://index.commoncrawl.org/CC-MAIN-2018-51-index",
       "kwknittersguild.ca/*"
-    ).foreach { entry =>
+    ).take(1).foreach { entry =>
       println(cdx.fetchWarc(entry.s3Url, entry.range))
     }
 
