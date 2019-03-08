@@ -12,10 +12,16 @@ libraryDependencies ++= Seq(
   "org.scalacheck" %% "scalacheck" % "1.14.0" % "test",
   "dk.brics" % "automaton" % "1.12-1",
   "de.siegmar" % "fastcsv" % "1.0.3",
+  "commons-io" % "commons-io" % "2.6",
+  "net.openhft" % "zero-allocation-hashing" % "0.9",
+  "org.jsoup" % "jsoup" % "1.11.3",
+
   "com.cldellow" %% "warc" % "0.0.2",
   "com.cldellow" %% "hash-matcher" % "0.0.1",
   "com.cldellow" % "gzip" % "0.0.2",
   "com.hankcs" % "aho-corasick-double-array-trie" % "1.2.1",
+  "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.9.8",
+
   "com.github.luben" % "zstd-jni" % "1.3.8-6",
 
 )
@@ -36,8 +42,6 @@ useGpg := true
 //fork := true
 
 //coverageEnabled := true
-
-assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false, includeDependency = true)
 
 ThisBuild / organization := "com.cldellow"
 ThisBuild / organizationName := "com.cldellow"

@@ -1,0 +1,8 @@
+#!/bin/bash
+set -euo pipefail
+
+export AWS_PROFILE="crawl"
+
+exec java -Djava.util.logging.config.file=./logging.properties \
+  -cp target/scala-2.12/cdx-assembly-*.jar \
+  com.cldellow.cdx.Fetch "$@"

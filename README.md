@@ -1,9 +1,7 @@
-# html-locations
-Given an HTML page, try to extract a latitude and longitude from it.
+# cdx
 
-## Extracting from GeoNames
+A subset of https://github.com/ikreymer/cdx-index-client
 
-1. Download http://download.geonames.org/export/dump/allCountries.zip
-2. Run `<allCountries.txt awk -F $'\t' 'BEGIN { OFS = "\t" } ($9 == "CA" || $9 == "GB" || $9 == "US" || $9 == "IE" || $9 == "AU" || $9 == "NZ") && $7 == "P"' { print $5, $6, $2, $11, $9 }` > cities.tsv
+Designed to make it easier to create subsets of the Common
+Crawl, for manipulation in other programs.
 
-This creates `cities.tsv` with these columns: `latitude`, `longitude`, `city name`, `state code`, `country ISO-3166-2 code`.
