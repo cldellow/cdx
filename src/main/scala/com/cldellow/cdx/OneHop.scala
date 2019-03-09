@@ -42,8 +42,14 @@ object OneHop {
               IOUtils.toByteArray(new GZIPInputStream(new ByteArrayInputStream(cdx.fetchWarc(entry.s3Url, entry.range)))),
               "UTF-8"
             )
+            val warcUrl = rawStr.substring(0, rawStr.indexOf("\r\n\r\n"))
+              .split("\r\n")
+              .filter(_.startsWith("WARC-Target-URI: "))
+              .head
+              .stripPrefix("WARC-Target-URI: ")
+
             val docStr = rawStr.substring(rawStr.indexOf("\r\n\r\n") + 4)
-            val doc = Jsoup.parse(docStr, url)
+            val doc = Jsoup.parse(docStr, warcUrl)
             val links = doc.select("a[href]")
 
             val allUrls = links.eachAttr("abs:href").asScala.filter { url =>
