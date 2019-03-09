@@ -18,6 +18,7 @@ libraryDependencies ++= Seq(
 
   "com.cldellow" %% "warc" % "0.0.2",
   "com.cldellow" %% "hash-matcher" % "0.0.1",
+  "com.cldellow" %% "url-cache" % "0.0.1",
   "com.cldellow" % "gzip" % "0.0.2",
   "com.hankcs" % "aho-corasick-double-array-trie" % "1.2.1",
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.9.8",
