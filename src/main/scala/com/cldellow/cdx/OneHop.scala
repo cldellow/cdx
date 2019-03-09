@@ -45,12 +45,34 @@ object OneHop {
             val docStr = rawStr.substring(rawStr.indexOf("\r\n\r\n") + 4)
             val doc = Jsoup.parse(docStr, url)
             val links = doc.select("a[href]")
-            val urls = (List(url) ++ links.eachAttr("abs:href").asScala.filter { url =>
+
+            val allUrls = links.eachAttr("abs:href").asScala.filter { url =>
               val isAbs = url.startsWith("http://") || url.startsWith("https://")
 
               isAbs && host == url.stripPrefix("http://").stripPrefix("https://").stripPrefix("www.").takeWhile(_ != '/')
             }
-              .take(10))
+
+            val top10Links = allUrls.take(10)
+
+            val mapWords = Set(
+              "directions",
+              "venue",
+              "contact",
+              "about",
+              "map",
+              "location",
+              "get-here",
+              "getting-here"
+            )
+
+            val probablyMapRelated =
+              allUrls
+                .flatMap(url => mapWords.find(mapWord => url.contains(mapWord)).map(_ -> url))
+                .groupBy(_._1)
+                .values
+                .map(_.head._2)
+
+            val urls = (List(url) ++ top10Links ++ probablyMapRelated)
               .map(normalizeUrl)
               .distinct
 
