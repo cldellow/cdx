@@ -50,9 +50,11 @@ object OneHop {
 
               isAbs && host == url.stripPrefix("http://").stripPrefix("https://").stripPrefix("www.").takeWhile(_ != '/')
             }
+              .take(10))
               .map(normalizeUrl)
-              .take(10)
-              .distinct)
+              .distinct
+
+            println(urls)
 
             var taken: Set[String] = Set.empty
             def shouldTake(f: String): Boolean = {
