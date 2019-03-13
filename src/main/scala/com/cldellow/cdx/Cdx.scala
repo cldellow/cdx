@@ -16,7 +16,7 @@ class Cdx(root: File) {
   }
 
   private def parseCdxLine(line: String): CdxEntry = {
-    val str = line.substring(line.indexOf("{"))
+    val str = line.substring(line.indexOf(" {"))
 
     mapper.readValue(str, classOf[CdxEntry])
   }
