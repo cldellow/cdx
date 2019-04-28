@@ -7,12 +7,20 @@ Crawl, for manipulation in other programs.
 
 ## Usage
 
-```
-./fetch CC-MAIN-2018-51 https://kwknittersguild.ca/fair/ # print out 1 200 OK copy of the URL
+```bash
+# print out 1 200 OK copy of the URL
+./fetch CC-MAIN-2018-51 https://kwknittersguild.ca/fair/
 ```
 
+```bash
+# print out 1 200 OK copy of the URL and its first 10 internal links
+./one-hop CC-MAIN-2018-51 https://kwknittersguild.ca/fair/
 ```
-./one-hop CC-MAIN-2018-51 https://kwknittersguild.ca/fair/ # print out 1 200 OK copy of the URL and its first 10 internal links
+
+```bash
+# filter the entries in the provided file (assumes the file was previously
+# created via warc-service)
+./filter-language eng <filename.zst>
 ```
 
 ## Cleanup

@@ -16,10 +16,9 @@ libraryDependencies ++= Seq(
   "net.openhft" % "zero-allocation-hashing" % "0.9",
   "org.jsoup" % "jsoup" % "1.11.3",
 
-  "com.cldellow" %% "warc" % "0.0.2",
+  "com.cldellow" %% "warc-framework" % "0.0.1",
   "com.cldellow" %% "hash-matcher" % "0.0.1",
   "com.cldellow" %% "url-cache" % "0.0.1",
-  "com.cldellow" % "gzip" % "0.0.2",
   "com.hankcs" % "aho-corasick-double-array-trie" % "1.2.1",
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.9.8",
 

@@ -27,7 +27,7 @@ class Cdx(root: File) {
   def query(api: String, url: String): Seq[CdxEntry] =
     new String(
       cache.fetch(
-        s"${api}?pageSize=1&url=${URLEncoder.encode(url, "UTF-8")}&filter=mime:html&filter==status:200",
+        s"${api}?pageSize=1&url=${URLEncoder.encode(url, "UTF-8")}&filter==status:200",
         prefix = "cdx"
       ),
       "UTF-8"
